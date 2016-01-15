@@ -1,0 +1,36 @@
+{
+	"version": 0,
+	"dependencies": [
+		{
+			"importpath": "github.com/golang/protobuf/proto",
+			"repository": "https://github.com/golang/protobuf",
+			"revision": "2402d76f3d41f928c7902a765dfc872356dd3aad",
+			"branch": "master",
+			"path": "/proto"
+		},
+		{
+			"importpath": "github.com/mreiferson/go-snappystream",
+			"repository": "https://github.com/mreiferson/go-snappystream",
+			"revision": "028eae7ab5c4c9e2d1cb4c4ca1e53259bbe7e504",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/nsqio/go-nsq",
+			"repository": "https://github.com/nsqio/go-nsq",
+			"revision": "2118015c120962edc5d03325c680daf3163a8b5f",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/onsi/ginkgo",
+			"repository": "https://github.com/onsi/ginkgo",
+			"revision": "e43390e35a4a88f3f95d5ddf9055efb7a1170469",
+			"branch": "master"
+		},
+		{
+			"importpath": "github.com/onsi/gomega",
+			"repository": "https://github.com/onsi/gomega",
+			"revision": "0fe204460da2c8fa1babcaac196e694de8f1aaa1",
+			"branch": "master"
+		}
+	]
+}

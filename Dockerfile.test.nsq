@@ -1,0 +1,25 @@
+FROM aminjam/mq-resource-tester
+
+# install nsqd
+RUN curl -s https://raw.githubusercontent.com/pote/gpm/v1.2.3/bin/gpm -o /usr/local/bin/gpm && \
+  chmod +x /usr/local/bin/gpm
+RUN export DEST=$GOPATH/src/github.com/nsqio/nsq && \
+  git clone https://github.com/nsqio/nsq $DEST && \
+  cd $DEST && gpm install && make BLDDIR=/usr/local/bin
+RUN echo "exec nsqd" >> /start.sh
+
+ENV SOURCE "{\
+    \"source\": {\
+      \"queue\": \"nsq\",\
+			\"uri\": \"0.0.0.0:4150\",\
+			\"sub\": \"hello\",\
+			\"pub\": \"publisher\",\
+      \"params\": {\
+        \"channel\": \"c\"\
+      }\
+    }\
+  }"
+ENV PUT_MESSAGE_ENDPOINT "http://127.0.0.1:4151/put?topic=hello"
+
+ADD . $MQ_RESOURCE_DEST
+ENTRYPOINT ["/run.sh"]
