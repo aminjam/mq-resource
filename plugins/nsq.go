@@ -36,7 +36,7 @@ func (p nsqPlugin) Check() ([]resource.StringMap, error) {
 	if err != nil {
 		return nil, err
 	}
-	time.Sleep(time.Second * 5)
+	time.Sleep(time.Second * resource.WaitFor)
 	consumer.Stop()
 	<-consumer.StopChan
 	return response, err

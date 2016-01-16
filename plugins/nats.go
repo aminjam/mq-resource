@@ -28,7 +28,7 @@ func (p natsPlugin) Check() ([]resource.StringMap, error) {
 		}
 		response = append(response, msg)
 	})
-	time.Sleep(time.Second * 5)
+	time.Sleep(time.Second * resource.WaitFor)
 	sub, err := c.Subscribe(p.Sub, nil)
 	if err != nil {
 		return nil, err

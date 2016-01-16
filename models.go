@@ -1,5 +1,11 @@
 package resource
 
+import "time"
+
+const (
+	WaitFor time.Duration = 5
+)
+
 type Source struct {
 	Queue  string    `json:"queue"`
 	Uri    string    `json:"uri"`

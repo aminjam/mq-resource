@@ -49,8 +49,9 @@ var _ = Describe("Check", func() {
 				_, err = mqResourceTester.PutMessage([]byte(v))
 				Expect(err).ToNot(HaveOccurred())
 			}
-			//wailt for 10 second
-			Eventually(session, 10*time.Second).Should(gexec.Exit(0))
+
+			//wailt for resource.WaitFor + 5 second
+			Eventually(session, (resource.WaitFor+5)*time.Second).Should(gexec.Exit(0))
 
 			err = json.Unmarshal(session.Out.Contents(), &response)
 			Expect(err).ToNot(HaveOccurred())
