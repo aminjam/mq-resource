@@ -1,22 +1,18 @@
 package mqResourceTester
 
 import (
-	"bytes"
-	"io/ioutil"
-	"net/http"
 	"os"
+	"os/exec"
 	"strings"
 )
 
 func PutMessage(message []byte) error {
-	endpoint := OsEnvs()["PUT_MESSAGE_ENDPOINT"]
-	reader := bytes.NewReader(message)
-	res, err := http.Post(endpoint, "application/json", reader)
+	cmd := exec.Command("/put-message", string(message))
+	err := cmd.Start()
 	if err != nil {
 		return err
 	}
-	_, err = ioutil.ReadAll(res.Body)
-	res.Body.Close()
+	err = cmd.Wait()
 	return err
 }
 

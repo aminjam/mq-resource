@@ -11,15 +11,19 @@ RUN echo "exec nsqd" >> /start.sh
 ENV SOURCE "{\
     \"source\": {\
       \"queue\": \"nsq\",\
-			\"uri\": \"0.0.0.0:4150\",\
-			\"sub\": \"hello\",\
-			\"pub\": \"publisher\",\
+      \"uri\": \"0.0.0.0:4150\",\
+      \"sub\": \"hello\",\
+      \"pub\": \"publisher\",\
       \"params\": {\
         \"channel\": \"c\"\
       }\
     }\
   }"
-ENV PUT_MESSAGE_ENDPOINT "http://127.0.0.1:4151/put?topic=hello"
+
+RUN echo "#!/bin/bash \n\
+curl -d \"\$1\" http://127.0.0.1:4151/put?topic=hello \
+" > /put-message
+RUN chmod +x /put-message
 
 ADD . $MQ_RESOURCE_DEST
 ENTRYPOINT ["/run.sh"]
