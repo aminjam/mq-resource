@@ -26,6 +26,8 @@ func NewPlugin(source resource.Source) (Resourcer, error) {
 	switch source.Queue {
 	case "nsq":
 		return plugin.nsq(source.Params)
+	case "nats":
+		return plugin.nats(source.Params)
 	}
 	return nil, fmt.Errorf("plugin not found.")
 }

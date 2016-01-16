@@ -1,0 +1,29 @@
+FROM aminjam/mq-resource-tester
+
+# install nats
+ENV VERSION="v0.7.2"
+RUN curl -sL https://github.com/nats-io/gnatsd/releases/download/$VERSION/gnatsd-$VERSION-linux-amd64.tar.gz -o nats.tar.gz && \
+  tar -xvf nats.tar.gz -C /tmp && \
+  mv /tmp/gnatsd /usr/local/bin/gnatsd && \
+  chmod +x /usr/local/bin/gnatsd && \
+  rm nats.tar.gz
+RUN echo "exec gnatsd" >> /start.sh
+
+ENV SOURCE '{\
+    "source": {\
+      "queue": "nats",\
+      "uri": "nats://127.0.0.1:4222",\
+      "sub": "hello",\
+      "pub": "publisher"\
+    }\
+  }'
+
+RUN apt-get install -y telnet
+RUN echo '#!/bin/bash \n\
+readonly MSG="$1" \n\
+{ echo "PUB hello ${#MSG}"; echo "$MSG"; } | telnet 127.0.0.1 4222 \n\
+exit 0' > /put-message
+RUN chmod +x /put-message
+
+ADD . $MQ_RESOURCE_DEST
+ENTRYPOINT ["/run.sh"]

@@ -11,7 +11,7 @@ docker_test() {
   pushd $DIR
   local dockerfile=$1
   local plugin=$2
-  local image="aminjam/test"
+  local image="aminjam/mq-resource-test-$plugin"
   docker build --file $dockerfile --tag ${image} .
   docker run -it --rm -e "PLUGIN=$plugin" ${image}
   popd

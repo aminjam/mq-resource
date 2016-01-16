@@ -6,14 +6,13 @@ import (
 	"strings"
 )
 
-func PutMessage(message []byte) error {
+func PutMessage(message []byte) (string, error) {
 	cmd := exec.Command("/put-message", string(message))
-	err := cmd.Start()
+	out, err := cmd.CombinedOutput()
 	if err != nil {
-		return err
+		return "", err
 	}
-	err = cmd.Wait()
-	return err
+	return string(out), nil
 }
 
 func OsEnvs() map[string]string {

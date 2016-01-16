@@ -24,8 +24,10 @@ var _ = Describe("Check", func() {
 	Context("with a plugin", func() {
 		var request check.Request
 		var response check.Response
+		var messages []string
 
 		BeforeEach(func() {
+			messages = []string{}
 			request = check.Request{
 				Version: resource.StringMap{},
 				Source:  source,
@@ -43,6 +45,10 @@ var _ = Describe("Check", func() {
 			err = json.NewEncoder(stdin).Encode(request)
 			Expect(err).ToNot(HaveOccurred())
 
+			for _, v := range messages {
+				_, err = mqResourceTester.PutMessage([]byte(v))
+				Expect(err).ToNot(HaveOccurred())
+			}
 			//wailt for 10 second
 			Eventually(session, 10*time.Second).Should(gexec.Exit(0))
 
@@ -57,8 +63,7 @@ var _ = Describe("Check", func() {
 
 			Context("when a version is present in the source", func() {
 				BeforeEach(func() {
-					err := mqResourceTester.PutMessage([]byte("{\"name\":\"john\"}"))
-					Expect(err).ToNot(HaveOccurred())
+					messages = []string{"{\"name\":\"john\"}"}
 				})
 
 				It("returns the version present at the source", func() {
@@ -83,8 +88,7 @@ var _ = Describe("Check", func() {
 
 			Context("when the source has a higher version", func() {
 				BeforeEach(func() {
-					err := mqResourceTester.PutMessage([]byte("{\"name\":\"john\"}"))
-					Expect(err).ToNot(HaveOccurred())
+					messages = []string{"{\"name\":\"john\"}"}
 				})
 
 				It("returns the version present at the source", func() {
@@ -95,10 +99,7 @@ var _ = Describe("Check", func() {
 
 			Context("when the source has multiple new versions", func() {
 				BeforeEach(func() {
-					err := mqResourceTester.PutMessage([]byte("{\"name\":\"john\"}"))
-					Expect(err).ToNot(HaveOccurred())
-					err = mqResourceTester.PutMessage([]byte("{\"name\":\"jacky\"}"))
-					Expect(err).ToNot(HaveOccurred())
+					messages = []string{"{\"name\":\"john\"}", "{\"name\":\"jacky\"}"}
 				})
 
 				It("returns the version present at the source", func() {
@@ -110,8 +111,7 @@ var _ = Describe("Check", func() {
 
 			Context("when it's the same as the current version", func() {
 				BeforeEach(func() {
-					err := mqResourceTester.PutMessage([]byte("{\"name\":\"johnson\"}"))
-					Expect(err).ToNot(HaveOccurred())
+					messages = []string{"{\"name\":\"johnson\"}"}
 				})
 
 				It("outputs an empty list", func() {
@@ -120,5 +120,4 @@ var _ = Describe("Check", func() {
 			})
 		})
 	})
-
 })

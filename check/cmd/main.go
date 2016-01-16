@@ -46,6 +46,7 @@ func main() {
 	os.Stdout = old
 	//uncomment the line below if needed to see the stdout from calling the plugin
 	//out := <-outC
+	//fmt.Println(out)
 
 	err = json.NewEncoder(os.Stdout).Encode(response)
 	checkError("writing response", err)
