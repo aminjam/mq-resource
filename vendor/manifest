@@ -17,56 +17,56 @@
 		{
 			"importpath": "github.com/nats-io/gnatsd/auth",
 			"repository": "https://github.com/nats-io/gnatsd",
-			"revision": "59a52ed83af58b454fef972707e0499af14a2c6c",
+			"revision": "25732e087bc4a124a0528384eabd1a48c60a9080",
 			"branch": "master",
 			"path": "/auth"
 		},
 		{
 			"importpath": "github.com/nats-io/gnatsd/conf",
 			"repository": "https://github.com/nats-io/gnatsd",
-			"revision": "59a52ed83af58b454fef972707e0499af14a2c6c",
+			"revision": "25732e087bc4a124a0528384eabd1a48c60a9080",
 			"branch": "master",
 			"path": "/conf"
 		},
 		{
 			"importpath": "github.com/nats-io/gnatsd/hash",
 			"repository": "https://github.com/nats-io/gnatsd",
-			"revision": "59a52ed83af58b454fef972707e0499af14a2c6c",
+			"revision": "25732e087bc4a124a0528384eabd1a48c60a9080",
 			"branch": "master",
 			"path": "/hash"
 		},
 		{
 			"importpath": "github.com/nats-io/gnatsd/hashmap",
 			"repository": "https://github.com/nats-io/gnatsd",
-			"revision": "59a52ed83af58b454fef972707e0499af14a2c6c",
+			"revision": "25732e087bc4a124a0528384eabd1a48c60a9080",
 			"branch": "master",
 			"path": "/hashmap"
 		},
 		{
 			"importpath": "github.com/nats-io/gnatsd/server",
 			"repository": "https://github.com/nats-io/gnatsd",
-			"revision": "59a52ed83af58b454fef972707e0499af14a2c6c",
+			"revision": "25732e087bc4a124a0528384eabd1a48c60a9080",
 			"branch": "master",
 			"path": "/server"
 		},
 		{
 			"importpath": "github.com/nats-io/gnatsd/sublist",
 			"repository": "https://github.com/nats-io/gnatsd",
-			"revision": "59a52ed83af58b454fef972707e0499af14a2c6c",
+			"revision": "25732e087bc4a124a0528384eabd1a48c60a9080",
 			"branch": "master",
 			"path": "/sublist"
 		},
 		{
 			"importpath": "github.com/nats-io/gnatsd/test",
 			"repository": "https://github.com/nats-io/gnatsd",
-			"revision": "59a52ed83af58b454fef972707e0499af14a2c6c",
+			"revision": "25732e087bc4a124a0528384eabd1a48c60a9080",
 			"branch": "master",
 			"path": "/test"
 		},
 		{
 			"importpath": "github.com/nats-io/nats",
 			"repository": "https://github.com/nats-io/nats",
-			"revision": "12435f89de7a84c88d9d7a9532e9103fdc6bb1cf",
+			"revision": "a08e4d10e14e7a29207e613f7a13cc41a1faaf4f",
 			"branch": "master"
 		},
 		{
