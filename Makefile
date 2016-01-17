@@ -21,7 +21,7 @@ endif
 docker:
 	@echo "--> Docker build and push"
 	@docker build -t ${DOCKER_IMAGE} ${PWD}
-	#@docker push ${DOCKER_IMAGE}
+	@docker push ${DOCKER_IMAGE}
 
 format:
 		@echo "--> Running go fmt"
