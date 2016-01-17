@@ -1,0 +1,33 @@
+resources:
+- name: nats
+  type: mq
+  source:
+    queue: nats
+    uri: "nats://10.0.4.8:4222"
+    pub: "news"
+- name: nsq
+  type: mq
+  source:
+    queue: nsq
+    uri: "10.0.4.8:4150"
+    sub: "talkers"
+    pub: "speakers"
+
+jobs:
+- name: nsq-to-nats
+  plan:
+  - aggregate:
+    - get: nsq
+      trigger: true
+  - task: say-hello
+    config:
+      inputs:
+        - name: nsq
+      platform: linux
+      image: "docker:///debian"
+      run:
+        path: bash
+        args: ["-c", "cat nsq/message.json"]
+  - put: nsq
+    resource: nats
+    params: { file: "nsq/message.json" }
