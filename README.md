@@ -68,7 +68,7 @@ Publish the content of the file to the queue.
 Built with Go 1.5.2 and `GO15VENDOREXPERIMENT` flag.
 ```shell
 git clone https://github.com/aminjam/mq-resource && cd mq-resource
-make update-deps
+make init
 make build
 make test #Optional PLUGIN="nsq"
 ```

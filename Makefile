@@ -1,10 +1,9 @@
-GOTOOLS = github.com/FiloSottile/gvt \
-	github.com/onsi/ginkgo/ginkgo
+GOTOOLS = github.com/FiloSottile/gvt github.com/onsi/ginkgo/ginkgo
 PACKAGES=$(shell go list ./... | grep -v vendor | sort | uniq)
 DOCKER_IMAGE="aminjam/mq-resource"
 PLUGIN=""
 
-all: format check-env update-deps test build docker
+all: format check-env init test build docker
 
 build:
 		@echo "--> Building mq-resource"
@@ -27,13 +26,17 @@ format:
 		@echo "--> Running go fmt"
 		@go fmt $(PACKAGES)
 
+init:
+		@echo "--> Init build tools"
+		@go get -v $(GOTOOLS)
+
 test:
 		@echo "--> Running Tests"
 		@${PWD}/scripts/integration-tests.sh ${PLUGIN}
 
 update-deps:
 		@echo "--> Updating dependencies"
-		@go get -v $(GOTOOLS)
+		@$(MAKE) init
 		@gvt update --all
 
-.PHONY: all build check-env docker format test update-deps
+.PHONY: all build check-env docker format init test update-deps
